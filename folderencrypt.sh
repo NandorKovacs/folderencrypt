@@ -26,13 +26,15 @@ fi
 
 rm -rf $FOLDERNAME
 
-echo '#!/bin/bash' > $FOLDERNAME.sh
-echo "gpg --decrypt $DATA/$FOLDERNAME | tar -xJ" >> $FOLDERNAME.sh
-echo 'if [ "$(echo $?)" != 0 ];' >> $FOLDERNAME.sh
-echo 'then' >> $FOLDERNAME.sh
-echo "        echo \"Error while decrypting. Won't delete encrypted file at $DATA/$FOLDERNAME\"" >> $FOLDERNAME.sh
-echo '        exit' >> $FOLDERNAME.sh
-echo 'fi' >> $FOLDERNAME.sh
-echo "rm -rf $DATA/$FOLDERNAME" >> $FOLDERNAME.sh
-echo "rm -rf $FOLDERNAME.sh" >> $FOLDERNAME.sh
-chmod u+x $FOLDERNAME.sh
+SKRIPTNAME=$FOLDERNAME.folderencrypt.sh
+
+echo '#!/bin/bash' > $SKRIPTNAME
+echo "gpg --decrypt $DATA/$FOLDERNAME | tar -xJ" >> $SKRIPTNAME
+echo 'if [ "$(echo $?)" != 0 ];' >> $SKRIPTNAME
+echo 'then' >> $SKRIPTNAME
+echo "        echo \"Error while decrypting. Won't delete encrypted file at $DATA/$FOLDERNAME\"" >> $SKRIPTNAME
+echo '        exit' >> $SKRIPTNAME
+echo 'fi' >> $SKRIPTNAME
+echo "rm -rf $DATA/$FOLDERNAME" >> $SKRIPTNAME
+echo "rm -rf $SKRIPTNAME" >> $SKRIPTNAME
+chmod u+x $SKRIPTNAME
